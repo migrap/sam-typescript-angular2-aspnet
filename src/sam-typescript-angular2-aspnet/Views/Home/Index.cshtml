@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<section id="rocket">
+    <rocket></rocket>
+</section>
+
+@section Scripts{
+    <script>
+        System.config({
+            packages: {
+                app: { defaultExtension: 'js' },
+                lib: { defaultExtension: 'js' }
+            }
+        });
+        System.import('app/main')
+            .then(null, console.error.bind(console));
+    </script>
+}

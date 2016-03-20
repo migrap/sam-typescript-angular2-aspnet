@@ -64,11 +64,7 @@ export class RocketViews extends Views {    constructor() {
     launched(model) {
         @Component({
             selector: 'launched',
-            template: `
-            <div>
-                Launched
-            </div>    
-            `
+            template: `<p>Launched</p>`
         })
         class Launched { }
         return Launched;

@@ -87,11 +87,7 @@ System.register(['angular2/core', './../sam/sam.views'], function(exports_1, con
                     Launched = __decorate([
                         core_1.Component({
                             selector: 'launched',
-                            template: `
-            <div>
-                Launched
-            </div>    
-            `
+                            template: `<p>Launched</p>`
                         }), 
                         __metadata('design:paramtypes', [])
                     ], Launched);

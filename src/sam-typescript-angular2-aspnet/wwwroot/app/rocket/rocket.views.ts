@@ -1,14 +1,15 @@
-﻿import { Component, EventEmitter, Output } from 'angular2/core';
+﻿import { Component, EventEmitter, Output, ElementRef } from 'angular2/core';
 import { Type } from 'angular2/src/facade/lang';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/subject/BehaviorSubject';
 import {RocketModel} from './rocket.model';
 import {Views} from './../sam/sam.views';
 
-export class RocketViews extends Views {
-    constructor() {
+declare var jQuery: any;
+
+export class RocketViews extends Views {    constructor() {
         super();
-    }    
+    }
 
     init(model) {
         this.ready(model);
@@ -22,30 +23,29 @@ export class RocketViews extends Views {
     }
 
     // State representation of the ready state
-    ready(model) {
+    ready(model) {        
         @Component({
             selector: 'ready',
             template: `
             <p>Counter: {{rocket.model.counter}}</p>
             <form (ngSubmit)="rocket.actions.start({})">
                 <input type="submit" value="Start">
-            </form>
-            `
+            </form>`
         })
         class Ready { }
-        return Ready;        
+        return Ready;
     }
 
     // State representation of the counting state
     counting(model) {
+
         @Component({
             selector: 'counting',
             template: `
             <p>Count down: {{rocket.model.counter}}</p>
             <form (ngSubmit)="rocket.actions.abort({})">
                 <input type="submit" value="Abort">
-            </form>
-            `
+            </form>`,
         })
         class Counting { }
         return Counting;
@@ -54,9 +54,7 @@ export class RocketViews extends Views {
     aborted(model) {
         @Component({
             selector: 'aborted',
-            template: `
-            <p>Aborted at counter: {{rocket.model.counter}}</p>
-            `
+            template: `<p>Aborted at counter: {{rocket.model.counter}}</p>`
         })
         class Aborted { }
         return Aborted;
@@ -66,9 +64,13 @@ export class RocketViews extends Views {
     launched(model) {
         @Component({
             selector: 'launched',
-            template: '<p>Launched</p>'
+            template: `
+            <div>
+                Launched
+            </div>    
+            `
         })
         class Launched { }
         return Launched;
-    }         
+    }
 }

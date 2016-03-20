@@ -44,8 +44,7 @@ System.register(['angular2/core', './../sam/sam.views'], function(exports_1, con
             <p>Counter: {{rocket.model.counter}}</p>
             <form (ngSubmit)="rocket.actions.start({})">
                 <input type="submit" value="Start">
-            </form>
-            `
+            </form>`
                         }), 
                         __metadata('design:paramtypes', [])
                     ], Ready);
@@ -62,8 +61,7 @@ System.register(['angular2/core', './../sam/sam.views'], function(exports_1, con
             <p>Count down: {{rocket.model.counter}}</p>
             <form (ngSubmit)="rocket.actions.abort({})">
                 <input type="submit" value="Abort">
-            </form>
-            `
+            </form>`,
                         }), 
                         __metadata('design:paramtypes', [])
                     ], Counting);
@@ -76,9 +74,7 @@ System.register(['angular2/core', './../sam/sam.views'], function(exports_1, con
                     Aborted = __decorate([
                         core_1.Component({
                             selector: 'aborted',
-                            template: `
-            <p>Aborted at counter: {{rocket.model.counter}}</p>
-            `
+                            template: `<p>Aborted at counter: {{rocket.model.counter}}</p>`
                         }), 
                         __metadata('design:paramtypes', [])
                     ], Aborted);
@@ -91,7 +87,11 @@ System.register(['angular2/core', './../sam/sam.views'], function(exports_1, con
                     Launched = __decorate([
                         core_1.Component({
                             selector: 'launched',
-                            template: '<p>Launched</p>'
+                            template: `
+            <div>
+                Launched
+            </div>    
+            `
                         }), 
                         __metadata('design:paramtypes', [])
                     ], Launched);

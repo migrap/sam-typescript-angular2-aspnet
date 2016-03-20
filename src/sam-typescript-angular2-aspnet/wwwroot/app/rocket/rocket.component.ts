@@ -5,9 +5,11 @@ import {RocketState} from './rocket.state';
 import {RocketViews} from './rocket.views';
 import {Sam} from '../sam/sam.component';
 
+declare var jQuery: any;
+
 @Component({
     selector: 'rocket',
-    template: '<div #rocket></div>'
+    templateUrl:'./app/rocket/rocket.html'
 })
 export class RocketComponent extends Sam<RocketActions, RocketModel, RocketState, RocketViews> {
     private component: ComponentRef;
@@ -27,6 +29,15 @@ export class RocketComponent extends Sam<RocketActions, RocketModel, RocketState
                 this.component = component;
             });
         });
+
+        this.views.updated.subscribe((reprsentation) => {
+            if (this.state.launched(this.model)) {
+                jQuery('rocket').find('#rocket_launch').css("margin-bottom", "1000px");
+                jQuery('rocket').find('.cloud_fill').css("animation", "smoke_size .35s infinite");
+                jQuery('rocket').find('.rocket_shadow').css("animation", "shadow_flare .35s infinite");                
+            }            
+        });
+
         this.views.updated.next(this.views.representation);
     }
 }

@@ -9,7 +9,7 @@ System.register(['./../sam/sam.model'], function(exports_1, context_1) {
                 sam_model_1 = sam_model_1_1;
             }],
         execute: function() {
-            exports_1("COUNTER_MAX", COUNTER_MAX = 10);
+            exports_1("COUNTER_MAX", COUNTER_MAX = 3);
             class RocketModel extends sam_model_1.Model {
                 constructor(state) {
                     super(state);

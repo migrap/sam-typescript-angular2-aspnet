@@ -10,12 +10,11 @@ System.register(['./../sam/sam.actions'], function(exports_1, context_1) {
             }],
         execute: function() {
             class RocketActions extends sam_actions_1.Actions {
-                constructor(/*public timeout, */ model) {
+                constructor(model) {
                     super(model);
                     this.model = model;
                 }
                 init() {
-                    //this.timeout = timeout;
                     this.model.present({});
                 }
                 display() {
@@ -30,7 +29,7 @@ System.register(['./../sam/sam.actions'], function(exports_1, context_1) {
                 decrement(data, present) {
                     present = present || this.model.present;
                     data = data || {};
-                    data.counter = data.counter || 10;
+                    data.counter = data.counter || 3;
                     var d = data;
                     var m = this.model;
                     setTimeout(function () {

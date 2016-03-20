@@ -1,7 +1,7 @@
 ﻿import {Model} from './../sam/sam.model';
 import {RocketState} from './rocket.state';
 
-export const COUNTER_MAX = 10;
+export const COUNTER_MAX = 3;
 
 export class RocketModel extends Model {
     public counter: number;

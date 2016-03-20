@@ -2,12 +2,11 @@
 import {RocketModel} from './rocket.model';
 
 export class RocketActions extends Actions {
-    constructor(/*public timeout, */public model: RocketModel) {
+    constructor(public model: RocketModel) {
         super(model);
     }
 
-    public init(/*timeout*/) {
-        //this.timeout = timeout;
+    public init() {
         this.model.present({});
     }
 
@@ -25,7 +24,7 @@ export class RocketActions extends Actions {
     public decrement(data, present) {
         present = present || this.model.present;
         data = data || {};
-        data.counter = data.counter || 10;
+        data.counter = data.counter || 3;
         var d = data;
         var m = this.model;
 

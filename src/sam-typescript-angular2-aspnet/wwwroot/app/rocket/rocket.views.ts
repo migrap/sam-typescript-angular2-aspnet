@@ -7,7 +7,8 @@ import {Views} from './../sam/sam.views';
 
 declare var jQuery: any;
 
-export class RocketViews extends Views {    constructor() {
+export class RocketViews extends Views {
+    constructor() {
         super();
     }
 
@@ -38,7 +39,6 @@ export class RocketViews extends Views {    constructor() {
 
     // State representation of the counting state
     counting(model) {
-
         @Component({
             selector: 'counting',
             template: `
@@ -50,6 +50,7 @@ export class RocketViews extends Views {    constructor() {
         class Counting { }
         return Counting;
     }
+
     // State representation of the aborted state
     aborted(model) {
         @Component({

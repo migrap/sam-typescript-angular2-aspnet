@@ -45,13 +45,15 @@ System.register(['angular2/core', './rocket.actions', './rocket.model', './rocke
                         // Not sure how efficient this is at replacing the DOM. Gut tells me it's exspensive.
                         // Could create a single view/template with ngIfs and a ViewModel that it would bind to.
                         // ViewModel properties would updated based on state
-                        this.loader.loadIntoLocation(representation, this.elementRef, 'rocket').then((component) => {
-                            if (this.component) {
-                                this.component.dispose();
-                            }
-                            component.instance.rocket = this;
-                            this.component = component;
-                        });
+                        if (this.component == undefined || this.component.componentType.name !== representation.name) {
+                            this.loader.loadIntoLocation(representation, this.elementRef, 'rocket').then((component) => {
+                                if (this.component) {
+                                    this.component.dispose();
+                                }
+                                component.instance.rocket = this;
+                                this.component = component;
+                            });
+                        }
                     });
                     this.views.updated.subscribe((reprsentation) => {
                         if (this.state.launched(this.model)) {

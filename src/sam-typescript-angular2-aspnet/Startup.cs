@@ -28,7 +28,6 @@ namespace sam_typescript_angular2_aspnet {
             loggerFactory.AddDebug();
 
             if(env.IsDevelopment()) {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else {

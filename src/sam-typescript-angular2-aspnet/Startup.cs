@@ -38,7 +38,11 @@ namespace sam_typescript_angular2_aspnet {
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes => routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}"));
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "{controller}/{action}/{id:int?}");
+
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+            });
         }
 
         // Entry point for the application.

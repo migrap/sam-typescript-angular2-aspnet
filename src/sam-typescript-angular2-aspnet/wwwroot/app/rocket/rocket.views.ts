@@ -1,4 +1,4 @@
-﻿import { Component, EventEmitter, Output, ElementRef } from 'angular2/core';
+﻿import { Component, EventEmitter, Output, ElementRef, Directive, Renderer } from 'angular2/core';
 import { Type } from 'angular2/src/facade/lang';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/subject/BehaviorSubject';
@@ -6,6 +6,15 @@ import {RocketModel} from './rocket.model';
 import {Views} from './../sam/sam.views';
 
 declare var jQuery: any;
+
+@Directive({
+    selector: '[redify]'
+})
+export class Redify {
+    constructor(private _element: ElementRef, private _renderer: Renderer) {
+        _renderer.setElementStyle(_element, 'color', 'red');
+    }
+}
 
 export class RocketViews extends Views {
     constructor() {
@@ -27,6 +36,7 @@ export class RocketViews extends Views {
     ready(model) {        
         @Component({
             selector: 'ready',
+            directives:[Redify],
             template: `
             <p>Counter: {{rocket.model.counter}}</p>
             <form (ngSubmit)="rocket.actions.start({})">
@@ -64,7 +74,7 @@ export class RocketViews extends Views {
     // State representation of the launched state
     launched(model) {
         @Component({
-            selector: 'launched',
+            selector: 'launched',            
             template: `<p>Launched</p>`
         })
         class Launched { }

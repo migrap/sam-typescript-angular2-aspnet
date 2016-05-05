@@ -1,7 +1,6 @@
 ﻿import { Component, EventEmitter, Output, ElementRef, Directive, Renderer } from 'angular2/core';
 import { Type } from 'angular2/src/facade/lang';
 import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/subject/BehaviorSubject';
 import {RocketModel} from './rocket.model';
 import {Views} from './../sam/sam.views';
 

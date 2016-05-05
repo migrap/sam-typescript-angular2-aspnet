@@ -52,6 +52,11 @@ gulp.task("copy:es6-shim", function () {
         .pipe(gulp.dest(paths.lib + '/es6-shim/'));
 });
 
+gulp.task("copy:zone.js", function () {
+    return gulp.src(paths.npm + '/zone.js/dist/**/*.*', { base: paths.npm + '/zone.js/dist/' })
+    .pipe(gulp.dest(paths.lib + '/zone.js/'));
+})
+
 gulp.task("copy", ["copy:systemjs", "copy:rxjs", "copy:angular2", "copy:es6-shim"]);
 
 gulp.task('default', ["clean", "copy"]);

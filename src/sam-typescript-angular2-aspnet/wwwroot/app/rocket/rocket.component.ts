@@ -1,4 +1,5 @@
-﻿import { Component, ElementRef, DynamicComponentLoader, ComponentRef } from 'angular2/core';
+﻿import { Component, ElementRef, DynamicComponentLoader, ComponentRef, Injector, ViewContainerRef, ViewChild } from 'angular2/core';
+import {isPresent} from 'angular2/src/facade/lang';
 import {RocketActions} from './rocket.actions';
 import {RocketModel} from './rocket.model';
 import {RocketState} from './rocket.state';
@@ -6,6 +7,7 @@ import {RocketViews} from './rocket.views';
 import {Sam} from '../sam/sam.component';
 
 declare var jQuery: any;
+declare var System: any;
 
 @Component({
     selector: 'rocket',
@@ -15,10 +17,13 @@ declare var jQuery: any;
 export class RocketComponent extends Sam<RocketActions, RocketModel, RocketState, RocketViews> {
     private component: ComponentRef;
 
-    constructor(private loader: DynamicComponentLoader, private elementRef: ElementRef) {
+    constructor(private loader: DynamicComponentLoader, private elementRef: ElementRef, private injector: Injector) {
         super(RocketActions, RocketModel, RocketState, RocketViews);
         this.actions.init();
     }
+
+    @ViewChild('viewport', { read: ViewContainerRef })
+    private viewport: ViewContainerRef;
 
     ngOnInit() {
         this.views.updated.subscribe((representation) => {
@@ -26,13 +31,21 @@ export class RocketComponent extends Sam<RocketActions, RocketModel, RocketState
             // Could create a single view/template with ngIfs and a ViewModel that it would bind to.
             // ViewModel properties would updated based on state
             if (this.component == undefined || this.component.componentType.name !== representation.name) {
-                this.loader.loadIntoLocation(representation, this.elementRef, 'rocket').then((component) => {
-                    if (this.component) {
-                        this.component.dispose();
-                    }
-                    component.instance.rocket = this;
-                    this.component = component;
+                var promise = this.loader.loadNextToLocation(representation, this.viewport);
+                promise.catch((reason) => {
+                    console.error(reason);
                 });
+                promise.then((component) => {
+                    console.log(component);
+                });
+                //this.loader.loadNextToLocation(representation, this.viewport);//.then((component) => {
+                    //if(this.component && isPresent(this.component)){
+                    //    (this.component as any).dispose();
+                    //    this.component = null;
+                    //}
+                    //component.instance.rocket = this;
+                    //this.component = component;
+                //});
             }
         });
 

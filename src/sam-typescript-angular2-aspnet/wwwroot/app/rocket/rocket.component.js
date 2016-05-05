@@ -34,10 +34,11 @@ System.register(['angular2/core', './rocket.actions', './rocket.model', './rocke
             }],
         execute: function() {
             let RocketComponent = class RocketComponent extends sam_component_1.Sam {
-                constructor(loader, elementRef) {
+                constructor(loader, elementRef, injector) {
                     super(rocket_actions_1.RocketActions, rocket_model_1.RocketModel, rocket_state_1.RocketState, rocket_views_1.RocketViews);
                     this.loader = loader;
                     this.elementRef = elementRef;
+                    this.injector = injector;
                     this.actions.init();
                 }
                 ngOnInit() {
@@ -46,12 +47,12 @@ System.register(['angular2/core', './rocket.actions', './rocket.model', './rocke
                         // Could create a single view/template with ngIfs and a ViewModel that it would bind to.
                         // ViewModel properties would updated based on state
                         if (this.component == undefined || this.component.componentType.name !== representation.name) {
-                            this.loader.loadIntoLocation(representation, this.elementRef, 'rocket').then((component) => {
-                                if (this.component) {
-                                    this.component.dispose();
-                                }
-                                component.instance.rocket = this;
-                                this.component = component;
+                            var promise = this.loader.loadNextToLocation(representation, this.viewport);
+                            promise.catch((reason) => {
+                                console.error(reason);
+                            });
+                            promise.then((component) => {
+                                console.log(component);
                             });
                         }
                     });
@@ -65,13 +66,17 @@ System.register(['angular2/core', './rocket.actions', './rocket.model', './rocke
                     this.views.updated.next(this.views.representation);
                 }
             };
+            __decorate([
+                core_1.ViewChild('viewport', { read: core_1.ViewContainerRef }), 
+                __metadata('design:type', core_1.ViewContainerRef)
+            ], RocketComponent.prototype, "viewport", void 0);
             RocketComponent = __decorate([
                 core_1.Component({
                     selector: 'rocket',
                     templateUrl: './app/rocket/rocket.template.html',
                     styleUrls: ['./app/rocket/rocket.style.css']
                 }), 
-                __metadata('design:paramtypes', [core_1.DynamicComponentLoader, core_1.ElementRef])
+                __metadata('design:paramtypes', [core_1.DynamicComponentLoader, core_1.ElementRef, core_1.Injector])
             ], RocketComponent);
             exports_1("RocketComponent", RocketComponent);
         }
